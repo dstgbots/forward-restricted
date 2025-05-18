@@ -1,5 +1,5 @@
 from pyrogram import Client
-from pyrogram.storage import MemoryStorage  # NEW
+from pyrogram.storage import MemoryStorage
 
 from telethon.sessions import StringSession
 from telethon.sync import TelegramClient
@@ -21,10 +21,10 @@ AUTH = config("AUTH", default=None, cast=int)
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN)
 
 userbot = Client(
-    name=SESSION,
+    name=SESSION or "userbot",
     api_id=API_ID,
     api_hash=API_HASH,
-    storage=MemoryStorage()
+    storage=MemoryStorage(SESSION or "userbot")
 )
 
 try:

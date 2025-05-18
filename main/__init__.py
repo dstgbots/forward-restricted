@@ -7,6 +7,8 @@ from telethon.sync import TelegramClient
 
 from decouple import config
 import logging, time, sys
+from pyrogram.storage import MemoryStorage
+
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.WARNING)
@@ -22,9 +24,11 @@ AUTH = config("AUTH", default=None, cast=int)
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN) 
 
 userbot = Client(
-    session_name=SESSION, 
-    api_hash=API_HASH, 
-    api_id=API_ID)
+    name=SESSION,
+    api_id=API_ID,
+    api_hash=API_HASH,
+    storage=MemoryStorage()
+)
 
 try:
     userbot.start()
@@ -33,12 +37,12 @@ except BaseException:
     sys.exit(1)
 
 Bot = Client(
-    "SaveRestricted",
+    name="SaveRestricted",
     bot_token=BOT_TOKEN,
-    api_id=int(API_ID),
-    api_hash=API_HASH
-)    
-
+    api_id=API_ID,
+    api_hash=API_HASH,
+    storage=MemoryStorage()
+)
 try:
     Bot.start()
 except Exception as e:

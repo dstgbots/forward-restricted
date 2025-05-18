@@ -21,10 +21,9 @@ AUTH = config("AUTH", default=None, cast=int)
 bot = TelegramClient('bot', API_ID, API_HASH).start(bot_token=BOT_TOKEN)
 
 userbot = Client(
-    name=SESSION or "userbot",
+    session_name=SESSION or "userbot",
     api_id=API_ID,
-    api_hash=API_HASH,
-    storage=MemoryStorage(SESSION or "userbot")
+    api_hash=API_HASH
 )
 
 try:
@@ -37,10 +36,8 @@ Bot = Client(
     name="SaveRestricted",
     bot_token=BOT_TOKEN,
     api_id=API_ID,
-    api_hash=API_HASH,
-    storage=MemoryStorage()
+    api_hash=API_HASH
 )
-
 try:
     Bot.start()
 except Exception as e:
